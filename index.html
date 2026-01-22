@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoloAPI - 企业级AI大模型API源头供应商</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #da7a5a;
+            --accent-color: #3498db;
+            --text-color: #333;
+            --text-secondary: #666;
+            --light-bg: #ffffff;
+            --card-bg: #ffffff;
+            --border-radius: 10px;
+            --box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', '微软雅黑', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .wrapper {
+            padding: 100px 0 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            padding: 0 30px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+        }
+        
+     .hero-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+            box-shadow: var(--box-shadow);
+        }
+
+
+
+
+        
+/* 让 PoloAPI 有高级渐变+流动效果 */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+ margin-top: 40px;
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  margin-bottom: 15px;
+  line-height: 1;
+
+  /* 渐变文字 + 流动动画 */
+  background: linear-gradient(
+    120deg,
+    var(--primary-color),
+    #8b5cf6,
+    var(--primary-color)
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  animation: logo-gradient-move 8s ease-in-out infinite;
+}
+
+/* 鼠标移上去，轻微放大一点，更有“活着”的感觉 */
+.logo:hover {
+  transform: translateY(-1px) scale(1.01);
+  transition: transform 0.3s ease;
+}
+
+/* 徽章：轻微流动 + 发光 */
+.logo-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 999px;
+  vertical-align: super;
+  margin-left: 10px;
+
+  background: linear-gradient(
+    120deg,
+    var(--secondary-color),
+    #6366f1,
+    var(--secondary-color)
+  );
+  background-size: 220% 100%;
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.25),
+              0 6px 16px rgba(15, 23, 42, 0.25);
+
+  animation: badge-gradient-move 5s linear infinite;
+}
+
+/* 鼠标移到徽章上，有一点点呼吸缩放 */
+.logo-badge:hover {
+  transform: translateY(-1px) scale(1.03);
+  transition: transform 0.25s ease;
+}
+
+/* Logo 渐变缓慢左右流动 */
+@keyframes logo-gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 徽章渐变更快一点，像微弱的能量流动 */
+@keyframes badge-gradient-move {
+  0% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.25),
+                0 4px 12px rgba(15, 23, 42, 0.20);
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.45),
+                0 8px 20px rgba(79, 70, 229, 0.35);
+  }
+  100% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.25),
+                0 4px 12px rgba(15, 23, 42, 0.20);
+  }
+}
+
+
+        
+       
+        
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        
+        .headline {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+        
+        .headline span {
+            color: var(--secondary-color);
+            position: relative;
+        }
+        
+        .headline span:after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(218, 122, 90, 0.2);
+            z-index: -1;
+        }
+        
+        .subheadline {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        .description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .emphasized {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+        
+        .buttons {
+            margin: 50px 0;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+        
+        .button {
+            display: inline-flex;
+            align-items: center;
+            padding: 16px 36px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            background-color: #c86a4a;
+        }
+        
+.button.secondary {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(90deg, #6366F1, #8B5CF6);
+    border: none;
+
+    cursor: pointer;
+    overflow: hidden;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    /* 动态渐变背景 */
+    background-size: 200% 100%;
+    animation: btn-gradient-move 5s linear infinite;
+}
+
+/* 悬停：轻微浮起 */
+.button.secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99,102,241,0.35);
+}
+
+/* 光线扫过动画 */
+.button.secondary::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,0.4) 50%,
+        transparent 100%
+    );
+    transform: skewX(-20deg);
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+.button.secondary:hover::after {
+    animation: btn-shine 0.9s ease;
+    opacity: 1;
+}
+
+/* 渐变左右流动 */
+@keyframes btn-gradient-move {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 亮光滑过动画 */
+@keyframes btn-shine {
+    0% { left: -80%; }
+    100% { left: 120%; }
+}
+
+
+
+        
+        .button i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .section {
+            margin: 80px 0;
+        }
+        
+        .section-title {
+            position: relative;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            font-weight: 700;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 35px;
+            margin: 50px 0;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .feature-card:hover:before {
+            opacity: 1;
+        }
+        
+        .feature-icon {
+            font-size: 2.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .feature-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        .feature-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .highlight-box {
+            background: rgba(218, 122, 90, 0.08);
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px 25px;
+            margin: 30px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            font-size: 1.1rem;
+        }
+        
+        .price-example {
+            background: rgba(44, 62, 80, 0.05);
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .price-example strong {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+            margin: 0px 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+            margin: 35px 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-3px);
+            border-bottom-color: var(--secondary-color);
+        }
+        
+        .contact-icon {
+            font-size: 1.6rem;
+            color: var(--secondary-color);
+            margin-right: 15px;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .contact-text {
+            font-weight: 500;
+        }
+        
+        .links-section {
+            margin: 40px 0;
+        }
+        
+        .link-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .link-item:hover {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .link-icon {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .link-text {
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .link-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .link-text a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+        
+        .notice {
+            background: rgba(255, 242, 242, 0.8);
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px 25px;
+            margin: 35px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            font-size: 1.05rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .notice p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .notice p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .notice-icon {
+            color: var(--secondary-color);
+            margin-right: 12px;
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+        
+        .model-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+        }
+        
+        .model-badge {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .model-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .model-badge i {
+            margin-right: 8px;
+            color: var(--secondary-color);
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .gallery-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .gallery-caption {
+            padding: 15px;
+            background: white;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+        
+        .tech-architecture {
+            width: 100%;
+            max-width: 900px;
+            margin: 40px auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .team-section {
+            background: white;
+            padding: 50px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin: 60px 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid rgba(218, 122, 90, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .member-title {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            margin-top: 80px;
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.7);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-link:hover {
+            color: var(--secondary-color);
+        }
+        
+        @media (max-width: 992px) {
+            .container {
+                padding: 0 25px;
+            }
+            
+            .logo {
+                font-size: 2.8rem;
+            }
+            
+            .headline {
+                font-size: 2.2rem;
+            }
+            
+            .subheadline {
+                font-size: 1.4rem;
+            }
+            
+            .image-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .wrapper {
+                padding: 70px 0 50px;
+            }
+
+            .logo {
+                font-size: 2.2rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .headline {
+                font-size: 1.8rem;
+            }
+
+            .subheadline {
+                font-size: 1.2rem;
+            }
+
+            .description {
+                font-size: 1.1rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .button {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-section {
+                padding: 30px 20px;
+            }
+        }
+
+        /* ========================================
+           英雄区域样式
+           ======================================== */
+
+        .hero-banner {
+            width: 100%;
+            max-width: 1050px;
+            margin: 0 auto 3rem;
+            padding-top: 2px;
+        }
+
+        .hero-banner video,
+        .hero-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--border-radius);
+        }
+
+        .hero-content {
+            text-align: center;
+            padding: 10px 0 20px;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @keyframes title-gradient {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .hero-badge {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            font-size: 0.875rem;
+            padding: 6px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .hero-slogan {
+            font-size: 1.3rem;
+            color: #6b7280;
+            margin: 8px 0 0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        /* 微信按钮悬浮显示二维码 */
+        .button.secondary .contact-qrcode {
+            position: absolute;
+            bottom: calc(100% + 15px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            text-align: center;
+            width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .button.secondary .contact-qrcode::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px;
+            border-style: solid;
+            border-color: white transparent transparent transparent;
+        }
+
+        .button.secondary .contact-qrcode img {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .button.secondary .contact-qrcode p {
+            margin: 10px 0 0;
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .button.secondary:hover .contact-qrcode {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .hero-cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+            border: none;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4),
+                            0 0 20px rgba(251, 191, 36, 0.2);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(251, 191, 36, 0.6),
+                            0 0 40px rgba(251, 191, 36, 0.4),
+                            0 0 60px rgba(251, 191, 36, 0.2);
+            }
+        }
+
+        .hero-cta-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 25px rgba(251, 191, 36, 0.5),
+                        0 0 50px rgba(251, 191, 36, 0.3);
+            color: white;
+            animation: none;
+        }
+
+        .hero-contact-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+            border: none;
+            position: relative;
+            animation: pulse-glow-contact 2s ease-in-out infinite;
+        }
+
+        .hero-pink-orange-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+            border: none;
+            position: relative;
+            animation: pulse-glow-pink-orange 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow-pink-orange {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4),
+                            0 0 20px rgba(249, 115, 22, 0.2);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(249, 115, 22, 0.6),
+                            0 0 40px rgba(249, 115, 22, 0.4),
+                            0 0 60px rgba(249, 115, 22, 0.2);
+            }
+        }
+
+        .hero-pink-orange-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 25px rgba(249, 115, 22, 0.5),
+                        0 0 50px rgba(249, 115, 22, 0.3);
+            color: white;
+            animation: none;
+        }
+
+        @keyframes pulse-glow-contact {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4),
+                            0 0 20px rgba(236, 72, 153, 0.2);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(236, 72, 153, 0.6),
+                            0 0 40px rgba(236, 72, 153, 0.4),
+                            0 0 60px rgba(236, 72, 153, 0.2);
+            }
+        }
+
+        .hero-contact-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 25px rgba(236, 72, 153, 0.5),
+                        0 0 50px rgba(236, 72, 153, 0.3);
+            color: white;
+            animation: none;
+        }
+
+        .contact-qrcode {
+            position: absolute;
+            bottom: calc(100% + 15px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            text-align: center;
+            width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .contact-qrcode::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px;
+            border-style: solid;
+            border-color: white transparent transparent transparent;
+        }
+
+        .contact-qrcode img {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .contact-qrcode p {
+            margin: 10px 0 0;
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .hero-contact-btn:hover .contact-qrcode {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .hero-cta-tip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: #f97316;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(234, 88, 12, 0.1));
+            border: 1px dashed #f97316;
+            border-radius: 20px;
+            animation: tip-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes tip-pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.3);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 15px 0 rgba(249, 115, 22, 0.2);
+            }
+        }
+
+        /* ========================================
+           品牌轮播样式
+           ======================================== */
+
+        .brand-carousel {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px 0;
+        }
+
+        .brand-carousel::before,
+        .brand-carousel::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .brand-carousel::before {
+            left: 0;
+            background: linear-gradient(to right, var(--light-bg), transparent);
+        }
+
+        .brand-carousel::after {
+            right: 0;
+            background: linear-gradient(to left, var(--light-bg), transparent);
+        }
+
+        .carousel-track {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            gap: 60px;
+            width: max-content;
+            animation: carousel-scroll 25s linear infinite;
+        }
+
+        .brand-carousel[data-animated="true"] .carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes carousel-scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-50% - 30px));
+            }
+        }
+
+        @keyframes carousel-scroll-reverse {
+            0% {
+                transform: translateX(calc(-50% - 30px));
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .brand-carousel.reverse .carousel-track {
+            animation: carousel-scroll-reverse 25s linear infinite;
+        }
+
+        .brand-carousel.reverse {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .brand-carousel .carousel-track .carousel-item {
+            flex-shrink: 0;
+            display: inline-block;
+            width: auto;
+            margin: 0;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            border-radius: 12px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #1f2937;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            cursor: default;
+            backdrop-filter: blur(4px);
+        }
+
+        .brand-logo svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .brand-logo span {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-logo:hover {
+            background: rgba(251, 191, 36, 0.1);
+            color: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.2);
+        }
+
+        .brand-logo:hover svg {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* 响应式调整 - 英雄区域 */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+
+            .hero-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .hero-btn i {
+                font-size: 14px;
+            }
+
+            .hero-cta-btn,
+            .hero-contact-btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+
+            .brand-carousel {
+                margin-top: 20px;
+                padding: 15px 0;
+            }
+
+            .brand-carousel::before,
+            .brand-carousel::after {
+                width: 60px;
+            }
+
+            .carousel-track {
+                gap: 40px;
+                animation-duration: 18s;
+            }
+
+            .brand-logo {
+                font-size: 0.95rem;
+                gap: 8px;
+                padding: 8px 16px;
+            }
+
+            .brand-logo svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .carousel-track {
+                animation: none;
+                overflow-x: auto;
+                scroll-behavior: smooth;
+            }
+
+            .brand-carousel {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container">
+            <!-- Banner视频（原GIF已转换为视频格式以优化加载速度） -->
+            <div class="hero-banner">
+                <video autoplay muted loop playsinline poster="./image/banner1-poster.jpg" style="width: 100%; height: auto;">
+                    <source src="./image/banner1.webm" type="video/webm">
+                    <source src="./image/banner1.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!-- Hero 文案区域 -->
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    PoloAPI - 全球领先的AI大模型API供应商
+                    <span class="hero-badge">源头供应商</span>
+                </h1>
+                <p class="hero-slogan">专业稳定高并发 | 直连官转中转API</p>
+
+                <!-- 按钮 -->
+                <div class="hero-buttons">
+                    <a href="https://poloapi.top/login/" class="hero-pink-orange-btn">
+                        <i class="fas fa-rocket"></i> 自助体验
+                    </a>
+                    <a href="https://polodaili.apifox.cn/" class="hero-contact-btn">
+                        <i class="fas fa-book"></i> 开发文档
+                    </a>
+                    <div class="hero-pink-orange-btn" style="position: relative; cursor: default;">
+                        <i class="fab fa-weixin"></i> 微信：api2047
+                        <div class="contact-qrcode">
+                            <img src="./image/footer-wx.webp" alt="微信二维码">
+                            <p>扫码添加微信 api2047</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="hero-cta-tip" style="margin-top: 20px;">注册可免费领取测试额度</p>
+
+                <!-- Logo轮播区域 -->
+                <div class="brand-carousel" data-animated="true">
+                    <div class="carousel-track">
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.0993 3.8558L12.6 8.3829l2.02-1.1638a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+                                <span>OpenAI</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>
+                                <span>Claude</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg>
+                                <span>Gemini</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                <span>Grok</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <img src="./image/deepseek.jpg" alt="DeepSeek" style="width: 28px; height: 28px; border-radius: 4px;">
+                                <span>DeepSeek</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3.996 4.517h5.291L8.01 6.324 4.153 7.506a1.668 1.668 0 0 0-1.165 1.601v5.786a1.668 1.668 0 0 0 1.165 1.6l3.857 1.183 1.277 1.807H3.996A3.996 3.996 0 0 1 0 15.487V8.513a3.996 3.996 0 0 1 3.996-3.996m16.008 0h-5.291l1.277 1.807 3.857 1.182c.715.227 1.17.889 1.165 1.601v5.786a1.668 1.668 0 0 1-1.165 1.6l-3.857 1.183-1.277 1.807h5.291A3.996 3.996 0 0 0 24 15.487V8.513a3.996 3.996 0 0 0-3.996-3.996m-4.007 8.345H8.002v-1.804h7.995Z"/></svg>
+                                <span>Qwen</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19.8772 1.4685L24 2.5326v18.9426l-4.1228 1.0563V1.4685zm-13.3481 9.428l4.115 1.0641v8.9786l-4.115 1.0642v-11.107zM0 2.572l4.115 1.0642v16.7354L0 21.428V2.572zm17.4553 5.6205v11.107l-4.1228-1.0642V9.2568l4.1228-1.0642z"/></svg>
+                                <span>Doubao</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                                <span>Mistral</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z"/></svg>
+                                <span>Llama</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6" fill="white"/><circle cx="12" cy="12" r="3"/></svg>
+                                <span>Cohere</span>
+                            </div>
+                        </div>
+                        <!-- 克隆元素 - 用于无缝循环 -->
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.0993 3.8558L12.6 8.3829l2.02-1.1638a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+                                <span>OpenAI</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>
+                                <span>Claude</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg>
+                                <span>Gemini</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                <span>Grok</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <img src="./image/deepseek.jpg" alt="DeepSeek" style="width: 28px; height: 28px; border-radius: 4px;">
+                                <span>DeepSeek</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3.996 4.517h5.291L8.01 6.324 4.153 7.506a1.668 1.668 0 0 0-1.165 1.601v5.786a1.668 1.668 0 0 0 1.165 1.6l3.857 1.183 1.277 1.807H3.996A3.996 3.996 0 0 1 0 15.487V8.513a3.996 3.996 0 0 1 3.996-3.996m16.008 0h-5.291l1.277 1.807 3.857 1.182c.715.227 1.17.889 1.165 1.601v5.786a1.668 1.668 0 0 1-1.165 1.6l-3.857 1.183-1.277 1.807h5.291A3.996 3.996 0 0 0 24 15.487V8.513a3.996 3.996 0 0 0-3.996-3.996m-4.007 8.345H8.002v-1.804h7.995Z"/></svg>
+                                <span>Qwen</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19.8772 1.4685L24 2.5326v18.9426l-4.1228 1.0563V1.4685zm-13.3481 9.428l4.115 1.0641v8.9786l-4.115 1.0642v-11.107zM0 2.572l4.115 1.0642v16.7354L0 21.428V2.572zm17.4553 5.6205v11.107l-4.1228-1.0642V9.2568l4.1228-1.0642z"/></svg>
+                                <span>Doubao</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                                <span>Mistral</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z"/></svg>
+                                <span>Llama</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6" fill="white"/><circle cx="12" cy="12" r="3"/></svg>
+                                <span>Cohere</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 第二条轮播 - 反向（完全不同的模型） -->
+                <div class="brand-carousel reverse" data-animated="true">
+                    <div class="carousel-track">
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M22.3977 7.0896h-2.3106V.0676l-7.5094 6.3542V.1577h-1.1554v6.1966L4.4904 0v7.0896H1.6023v10.3976h2.8882V24l6.932-6.3591v6.2005h1.1554v-6.0469l6.9318 6.1807v-6.4879h2.8882V7.0896zm-3.4657-4.531v4.531h-5.355l5.355-4.531zm-13.2862.0676 4.8691 4.4634H5.6458V2.6262zM2.7576 16.332V8.245h7.8476l-6.1149 6.1147v1.9723H2.7576zm2.8882 5.0404v-3.8852h.0001v-2.6488l5.7763-5.7764v7.0111l-5.7764 5.2993zm12.7086.0248-5.7766-5.1509V9.0618l5.7766 5.7766v6.5588zm2.8882-5.0652h-1.733v-1.9723L13.3948 8.245h7.8478v8.087z"/></svg>
+                                <span>Perplexity</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M4 4h4v4H4V4zm6 0h4v4h-4V4zm6 0h4v4h-4V4zM4 10h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4zM4 16h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4z"/></svg>
+                                <span>Midjourney</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+                                <span>Kimi</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+                                <span>Stability AI</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12.025 1.13c-5.77 0-10.449 4.647-10.449 10.378 0 1.112.178 2.181.503 3.185.064-.222.203-.444.416-.577a.96.96 0 0 1 .524-.15c.293 0 .584.124.84.284.278.173.48.408.71.694.226.282.458.611.684.951v-.014c.017-.324.106-.622.264-.874s.403-.487.762-.543c.3-.047.596.06.787.203s.31.313.4.467c.15.257.212.468.233.542.01.026.653 1.552 1.657 2.54.616.605 1.01 1.223 1.082 1.912.055.537-.096 1.059-.38 1.572.637.121 1.294.187 1.967.187.657 0 1.298-.063 1.921-.178-.287-.517-.44-1.041-.384-1.581.07-.69.465-1.307 1.081-1.913 1.004-.987 1.647-2.513 1.657-2.539.021-.074.083-.285.233-.542.09-.154.208-.323.4-.467a1.08 1.08 0 0 1 .787-.203c.359.056.604.29.762.543s.247.55.265.874v.015c.225-.34.457-.67.683-.952.23-.286.432-.52.71-.694.257-.16.547-.284.84-.285a.97.97 0 0 1 .524.151c.228.143.373.388.43.625l.006.04a10.3 10.3 0 0 0 .534-3.273c0-5.731-4.678-10.378-10.449-10.378M8.327 6.583a1.5 1.5 0 0 1 .713.174 1.487 1.487 0 0 1 .617 2.013c-.183.343-.762-.214-1.102-.094-.38.134-.532.914-.917.71a1.487 1.487 0 0 1 .69-2.803m7.486 0a1.487 1.487 0 0 1 .689 2.803c-.385.204-.536-.576-.916-.71-.34-.12-.92.437-1.103.094a1.487 1.487 0 0 1 .617-2.013 1.5 1.5 0 0 1 .713-.174m-10.68 1.55a.96.96 0 1 1 0 1.921.96.96 0 0 1 0-1.92m13.838 0a.96.96 0 1 1 0 1.92.96.96 0 0 1 0-1.92M8.489 11.458c.588.01 1.965 1.157 3.572 1.164 1.607-.007 2.984-1.155 3.572-1.164.196-.003.305.12.305.454 0 .886-.424 2.328-1.563 3.202-.22-.756-1.396-1.366-1.63-1.32q-.011.001-.02.006l-.044.026-.01.008-.03.024q-.018.017-.035.036l-.032.04a1 1 0 0 0-.058.09l-.014.025q-.049.088-.11.19a1 1 0 0 1-.083.116 1.2 1.2 0 0 1-.173.18q-.035.029-.075.058a1.3 1.3 0 0 1-.251-.243 1 1 0 0 1-.076-.107c-.124-.193-.177-.363-.337-.444-.034-.016-.104-.008-.2.022q-.094.03-.216.087-.06.028-.125.063l-.13.074q-.067.04-.136.086a3 3 0 0 0-.135.096 3 3 0 0 0-.26.219 2 2 0 0 0-.12.121 2 2 0 0 0-.106.128l-.002.002a2 2 0 0 0-.09.132l-.001.001a1.2 1.2 0 0 0-.105.212q-.013.036-.024.073c-1.139-.875-1.563-2.317-1.563-3.203 0-.334.109-.457.305-.454m.836 10.354c.824-1.19.766-2.082-.365-3.194-1.13-1.112-1.789-2.738-1.789-2.738s-.246-.945-.806-.858-.97 1.499.202 2.362c1.173.864-.233 1.45-.685.64-.45-.812-1.683-2.896-2.322-3.295s-1.089-.175-.938.647 2.822 2.813 2.562 3.244-1.176-.506-1.176-.506-2.866-2.567-3.49-1.898.473 1.23 2.037 2.16c1.564.932 1.686 1.178 1.464 1.53s-3.675-2.511-4-1.297c-.323 1.214 3.524 1.567 3.287 2.405-.238.839-2.71-1.587-3.216-.642-.506.946 3.49 2.056 3.522 2.064 1.29.33 4.568 1.028 5.713-.624m5.349 0c-.824-1.19-.766-2.082.365-3.194 1.13-1.112 1.789-2.738 1.789-2.738s.246-.945.806-.858.97 1.499-.202 2.362c-1.173.864.233 1.45.685.64.451-.812 1.683-2.896 2.322-3.295s1.089-.175.938.647-2.822 2.813-2.562 3.244 1.176-.506 1.176-.506 2.866-2.567 3.49-1.898-.473 1.23-2.037 2.16c-1.564.932-1.686 1.178-1.464 1.53s3.675-2.511 4-1.297c.323 1.214-3.524 1.567-3.287 2.405.238.839 2.71-1.587 3.216-.642.506.946-3.49 2.056-3.522 2.064-1.29.33-4.568 1.028-5.713-.624"/></svg>
+                                <span>Hugging Face</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l4.59-4.58L18 11l-6 6z"/></svg>
+                                <span>Yi</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                <span>Baichuan</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                                <span>GLM</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <span>Spark</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M9.154 0C7.71 0 6.54 1.658 6.54 3.707c0 2.051 1.171 3.71 2.615 3.71 1.446 0 2.614-1.659 2.614-3.71C11.768 1.658 10.6 0 9.154 0zm7.025.594C14.86.58 13.347 2.589 13.2 3.927c-.187 1.745.25 3.487 2.179 3.735 1.933.25 3.175-1.806 3.422-3.364.252-1.555-.995-3.364-2.362-3.674a1.218 1.218 0 0 0-.261-.03zM3.582 5.535a2.811 2.811 0 0 0-.156.008c-2.118.19-2.428 3.24-2.428 3.24-.287 1.41.686 4.425 3.297 3.864 2.617-.561 2.262-3.68 2.183-4.362-.125-1.018-1.292-2.773-2.896-2.75zm16.534 1.753c-2.308 0-2.617 2.119-2.617 3.616 0 1.43.121 3.425 2.988 3.362 2.867-.063 2.553-3.238 2.553-3.988 0-.745-.62-2.99-2.924-2.99zm-8.264 2.478c-1.424.014-2.708.925-3.323 1.947-1.118 1.868-2.863 3.05-3.112 3.363-.25.309-3.61 2.116-2.864 5.42.746 3.301 3.365 3.237 3.365 3.237s1.93.19 4.171-.31c2.24-.495 4.17.123 4.17.123s5.233 1.748 6.665-1.616c1.43-3.364-.808-5.109-.808-5.109s-2.99-2.306-4.736-4.798c-1.072-1.665-2.348-2.268-3.528-2.257zm-2.234 3.84l1.542.024v8.197H7.758c-1.47-.291-2.055-1.292-2.13-1.462-.072-.173-.488-.976-.268-2.343.635-2.049 2.447-2.196 2.447-2.196h1.81zm3.964 2.39v3.881c.096.413.612.488.612.488h1.614v-4.343h1.689v5.782h-3.915c-1.517-.39-1.59-1.465-1.59-1.465v-4.317zm-5.458 1.147c-.66.197-.978.708-1.05.928-.076.22-.247.78-.1 1.269.294 1.095 1.248 1.144 1.248 1.144h1.37v-3.34z"/></svg>
+                                <span>Wenxin</span>
+                            </div>
+                        </div>
+                        <!-- 克隆元素 -->
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M22.3977 7.0896h-2.3106V.0676l-7.5094 6.3542V.1577h-1.1554v6.1966L4.4904 0v7.0896H1.6023v10.3976h2.8882V24l6.932-6.3591v6.2005h1.1554v-6.0469l6.9318 6.1807v-6.4879h2.8882V7.0896zm-3.4657-4.531v4.531h-5.355l5.355-4.531zm-13.2862.0676 4.8691 4.4634H5.6458V2.6262zM2.7576 16.332V8.245h7.8476l-6.1149 6.1147v1.9723H2.7576zm2.8882 5.0404v-3.8852h.0001v-2.6488l5.7763-5.7764v7.0111l-5.7764 5.2993zm12.7086.0248-5.7766-5.1509V9.0618l5.7766 5.7766v6.5588zm2.8882-5.0652h-1.733v-1.9723L13.3948 8.245h7.8478v8.087z"/></svg>
+                                <span>Perplexity</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M4 4h4v4H4V4zm6 0h4v4h-4V4zm6 0h4v4h-4V4zM4 10h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4zM4 16h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4z"/></svg>
+                                <span>Midjourney</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+                                <span>Kimi</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+                                <span>Stability AI</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12.025 1.13c-5.77 0-10.449 4.647-10.449 10.378 0 1.112.178 2.181.503 3.185.064-.222.203-.444.416-.577a.96.96 0 0 1 .524-.15c.293 0 .584.124.84.284.278.173.48.408.71.694.226.282.458.611.684.951v-.014c.017-.324.106-.622.264-.874s.403-.487.762-.543c.3-.047.596.06.787.203s.31.313.4.467c.15.257.212.468.233.542.01.026.653 1.552 1.657 2.54.616.605 1.01 1.223 1.082 1.912.055.537-.096 1.059-.38 1.572.637.121 1.294.187 1.967.187.657 0 1.298-.063 1.921-.178-.287-.517-.44-1.041-.384-1.581.07-.69.465-1.307 1.081-1.913 1.004-.987 1.647-2.513 1.657-2.539.021-.074.083-.285.233-.542.09-.154.208-.323.4-.467a1.08 1.08 0 0 1 .787-.203c.359.056.604.29.762.543s.247.55.265.874v.015c.225-.34.457-.67.683-.952.23-.286.432-.52.71-.694.257-.16.547-.284.84-.285a.97.97 0 0 1 .524.151c.228.143.373.388.43.625l.006.04a10.3 10.3 0 0 0 .534-3.273c0-5.731-4.678-10.378-10.449-10.378M8.327 6.583a1.5 1.5 0 0 1 .713.174 1.487 1.487 0 0 1 .617 2.013c-.183.343-.762-.214-1.102-.094-.38.134-.532.914-.917.71a1.487 1.487 0 0 1 .69-2.803m7.486 0a1.487 1.487 0 0 1 .689 2.803c-.385.204-.536-.576-.916-.71-.34-.12-.92.437-1.103.094a1.487 1.487 0 0 1 .617-2.013 1.5 1.5 0 0 1 .713-.174m-10.68 1.55a.96.96 0 1 1 0 1.921.96.96 0 0 1 0-1.92m13.838 0a.96.96 0 1 1 0 1.92.96.96 0 0 1 0-1.92M8.489 11.458c.588.01 1.965 1.157 3.572 1.164 1.607-.007 2.984-1.155 3.572-1.164.196-.003.305.12.305.454 0 .886-.424 2.328-1.563 3.202-.22-.756-1.396-1.366-1.63-1.32q-.011.001-.02.006l-.044.026-.01.008-.03.024q-.018.017-.035.036l-.032.04a1 1 0 0 0-.058.09l-.014.025q-.049.088-.11.19a1 1 0 0 1-.083.116 1.2 1.2 0 0 1-.173.18q-.035.029-.075.058a1.3 1.3 0 0 1-.251-.243 1 1 0 0 1-.076-.107c-.124-.193-.177-.363-.337-.444-.034-.016-.104-.008-.2.022q-.094.03-.216.087-.06.028-.125.063l-.13.074q-.067.04-.136.086a3 3 0 0 0-.135.096 3 3 0 0 0-.26.219 2 2 0 0 0-.12.121 2 2 0 0 0-.106.128l-.002.002a2 2 0 0 0-.09.132l-.001.001a1.2 1.2 0 0 0-.105.212q-.013.036-.024.073c-1.139-.875-1.563-2.317-1.563-3.203 0-.334.109-.457.305-.454m.836 10.354c.824-1.19.766-2.082-.365-3.194-1.13-1.112-1.789-2.738-1.789-2.738s-.246-.945-.806-.858-.97 1.499.202 2.362c1.173.864-.233 1.45-.685.64-.45-.812-1.683-2.896-2.322-3.295s-1.089-.175-.938.647 2.822 2.813 2.562 3.244-1.176-.506-1.176-.506-2.866-2.567-3.49-1.898.473 1.23 2.037 2.16c1.564.932 1.686 1.178 1.464 1.53s-3.675-2.511-4-1.297c-.323 1.214 3.524 1.567 3.287 2.405-.238.839-2.71-1.587-3.216-.642-.506.946 3.49 2.056 3.522 2.064 1.29.33 4.568 1.028 5.713-.624m5.349 0c-.824-1.19-.766-2.082.365-3.194 1.13-1.112 1.789-2.738 1.789-2.738s.246-.945.806-.858.97 1.499-.202 2.362c-1.173.864.233 1.45.685.64.451-.812 1.683-2.896 2.322-3.295s1.089-.175.938.647-2.822 2.813-2.562 3.244 1.176-.506 1.176-.506 2.866-2.567 3.49-1.898-.473 1.23-2.037 2.16c-1.564.932-1.686 1.178-1.464 1.53s3.675-2.511 4-1.297c.323 1.214-3.524 1.567-3.287 2.405.238.839 2.71-1.587 3.216-.642.506.946-3.49 2.056-3.522 2.064-1.29.33-4.568 1.028-5.713-.624"/></svg>
+                                <span>Hugging Face</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l4.59-4.58L18 11l-6 6z"/></svg>
+                                <span>Yi</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                <span>Baichuan</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                                <span>GLM</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <span>Spark</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item clone" aria-hidden="true">
+                            <div class="brand-logo">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M9.154 0C7.71 0 6.54 1.658 6.54 3.707c0 2.051 1.171 3.71 2.615 3.71 1.446 0 2.614-1.659 2.614-3.71C11.768 1.658 10.6 0 9.154 0zm7.025.594C14.86.58 13.347 2.589 13.2 3.927c-.187 1.745.25 3.487 2.179 3.735 1.933.25 3.175-1.806 3.422-3.364.252-1.555-.995-3.364-2.362-3.674a1.218 1.218 0 0 0-.261-.03zM3.582 5.535a2.811 2.811 0 0 0-.156.008c-2.118.19-2.428 3.24-2.428 3.24-.287 1.41.686 4.425 3.297 3.864 2.617-.561 2.262-3.68 2.183-4.362-.125-1.018-1.292-2.773-2.896-2.75zm16.534 1.753c-2.308 0-2.617 2.119-2.617 3.616 0 1.43.121 3.425 2.988 3.362 2.867-.063 2.553-3.238 2.553-3.988 0-.745-.62-2.99-2.924-2.99zm-8.264 2.478c-1.424.014-2.708.925-3.323 1.947-1.118 1.868-2.863 3.05-3.112 3.363-.25.309-3.61 2.116-2.864 5.42.746 3.301 3.365 3.237 3.365 3.237s1.93.19 4.171-.31c2.24-.495 4.17.123 4.17.123s5.233 1.748 6.665-1.616c1.43-3.364-.808-5.109-.808-5.109s-2.99-2.306-4.736-4.798c-1.072-1.665-2.348-2.268-3.528-2.257zm-2.234 3.84l1.542.024v8.197H7.758c-1.47-.291-2.055-1.292-2.13-1.462-.072-.173-.488-.976-.268-2.343.635-2.049 2.447-2.196 2.447-2.196h1.81zm3.964 2.39v3.881c.096.413.612.488.612.488h1.614v-4.343h1.689v5.782h-3.915c-1.517-.39-1.59-1.465-1.59-1.465v-4.317zm-5.458 1.147c-.66.197-.978.708-1.05.928-.076.22-.247.78-.1 1.269.294 1.095 1.248 1.144 1.248 1.144h1.37v-3.34z"/></svg>
+                                <span>Wenxin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="wrapper">
+        <div class="container">
+
+
+            
+            <div class="divider"></div>
+  <h2 class="section-title">价格分组-量大请联系微信</h2>
+<div style="display:flex; gap:50px; align-items:flex-start;">
+
+    <!-- 左：价格表 -->
+    <div style="flex:1; min-width:0;">
+
+        <h3>S级优质资源</h3>
+        <ul>
+            <li>Claude Gpt Gemini Grok官方key - 5元/刀</li>
+            <li>Gemini 纯vertex渠道 - 2元/刀</li>
+            <li>AWS官key - 4元/刀</li>
+            <li>gpt AZ渠道（模型不全） - 2元/刀</li>
+            <li>豆包、Qwen、Deepseek、智普 - 6-8折</li>
+            <li>可灵 - 7折</li>
+        </ul>
+
+        <h3>A级标准资源</h3>
+        <ul>
+            <li>Claude AZ渠道 - 0.8元/刀</li>
+            <li>Claude逆向 纯MAX号池 - 0.8元/刀</li>
+            <li>Gemini vertex渠道（aistudio兜底） - 0.8元/刀</li>
+            <li>Gemini cli渠道 - 0.3元/刀</li>
+            <li>VEO3.1 逆 - 0.25元/快速/次</li>
+            <li>nano、nanopro - 0.08 / 0.16元/次</li>
+            <li>sora2 sora2pro - 0.1元/次 / 1.8元/次</li>
+            <li>mj慢 - 0.1元/次</li>
+        </ul>
+
+        <h3>限时特价资源</h3>
+        <ul>
+            <li>kiro - 0.15元/刀</li>
+        </ul>
+
+    </div>
+    </div>
+  <div class="divider"></div>
+    <!-- 右：二维码 -->
+    <div style="width:620px; flex-shrink:0;">
+
+        <div style="display:flex; gap:40px; justify-content:center;">
+
+            <!-- QQ -->
+            <div style="text-align:center;">
+                <img src="https://raw.githubusercontent.com/ring88127/POLOAPI.top/d60893321d4e9732fab5811b40e828bf08200e4a/qq%E7%BE%A4%EF%BC%9A818064448.png"
+                     style="max-width:260px; width:100%; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,.15);">
+                <div style="margin-top:10px; font-size:14px;">扫码加入 PoloAPI QQ 群</div>
+            </div>
+
+            <!-- 微信 -->
+            <div style="text-align:center;">
+                <img src="https://raw.githubusercontent.com/ring88127/POLOAPI.top/57112696a4945a4cfca0ccf5d55149d73920bcad/%E5%BE%AE%E4%BF%A1api2047.png"
+                     style="max-width:260px; width:100%; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,.15);">
+                <div style="margin-top:10px; font-size:14px;">扫码添加客服微信 api2047</div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+            
+            
+         <div class="divider"></div>
+                  <h2 class="section-title">联系我们</h2>
+    <ul style="margin-top: 15px; margin-left: 20px;">
+                            <li>作为上游供应商，我们不仅提供API服务，也有自主开发的产品：大模型微调、量化投资、AI落地应用等，如有机会可以深入合作。</li>
+                            <li>选择我们的几大主要原因：比官方更低的价格、无须充值所有平台更方便、低成本学习更多api技术解决方案</li>
+                            <li>公司位于美丽大广州，另有海内外主体，欢迎企业客户洽谈咨询。</li>
+                        </ul>
+    
+        
+
+
+                       <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-weixin"></i>
+                        </div>
+                         <div class="contact-text">qq群：818064448 进群先注册，验证消息填用户名</div>
+                    </div>
+                    
+                
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="contact-text">Telegram：@dao22work</div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">商务合作：contact@PoloAPI.com</div>
+                    </div>
+                </div>
+                
+                <div class="links-section">
+                    <div class="link-item">
+                        <div class="link-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                      <div class="contact-text">客服团队微信 :api2047 （务必先注册，然后备注在本站注册的用户名）</div>
+                    </div>
+                    
+                    <div class="link-item">
+                        <div class="link-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <div class="link-text">
+                            <strong>演示平台：</strong><a href="https://www.cherry-ai.com/" target="_blank">https://www.cherry-ai.com/</a>
+                        </div>
+                    </div>
+                    
+                    <div class="link-item">
+                        <div class="link-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="link-text">
+                            <strong>技术文档：</strong><a href="https://polodaili.apifox.cn/" target="_blank">https://polodaili.apifox.cn/</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="notice">
+                    <p><i class="fas fa-info-circle notice-icon"></i> 专业提示：我们提供API调用优化建议，帮助企业降低使用成本，提高响应速度。</p>
+                    <p><i class="fas fa-exclamation-circle notice-icon"></i> 企业客户可申请专属技术顾问，解决复杂集成问题。</p>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-links">
+                    <a href="#" class="footer-link">服务条款</a>
+                    <a href="#" class="footer-link">隐私政策</a>
+                    <a href="#" class="footer-link">API状态</a>
+                    <a href="#" class="footer-link">企业合作</a>
+                </div>
+                <p>&copy; 2025 PoloAPI - 企业级AI大模型API源头供应商. 保留所有权利.</p>
+
+            </footer>
+        </div>
+    </div>
+
+    <!-- 英雄区域按钮事件脚本 -->
+    <script>
+        // 自助体验按钮功能
+        function handleHeroCTA() {
+            window.open('https://poloapi.top/login/', '_blank');
+        }
+
+        // 开发文档按钮功能
+        function handleDocBtn() {
+            window.open('https://polodaili.apifox.cn/', '_blank');
+        }
+    </script>
+</body>
+</html>
+              
